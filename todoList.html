@@ -7,6 +7,10 @@
 </head>
 
 <body>
+
+    
+<button id = "display-todos-button">Display todos</button>
+<button id = "toggle-all">Toggle All</button>
     <script>
 
         var todos = [
@@ -15,21 +19,21 @@
             { todoText: "item3", completed: false }
         ]
 
-        console.log(todos)
+        displayTodos()
 
         function add(initialTodoText) {
             todos.push({ todoText: initialTodoText, completed: false })
-            console.log(todos)
+            displayTodos()
         }
 
         function edit(position, newTodoText) {
             todos[position].todoText = newTodoText;
-            console.log(todos)
+            displayTodos()
         }
 
         function remove(position) {
             todos.splice(position, 1)
-            console.log(todos)
+            displayTodos()
 
         }
 
@@ -39,8 +43,44 @@
             }else{
                 todos[position].completed = false
             }
-            console.log(todos)
+            displayTodos()
         }
+
+        function displayTodos() {
+            for (var i = 0; i < todos.length; i++) {
+                console.log(todos[i])
+            }
+        }
+
+    
+
+        function toggleAll() {
+            var completedTodos = 0;
+
+            for (var i = 0; i < todos.length; i++) {
+                if (todos[i].completed === true) {
+                    completedTodos++;
+                }
+            }
+             
+             if (completedTodos === todos.length) {
+                 for (var i = 0; i < todos.length; i++) {
+                     todos[i].completed = false
+                 }
+             }else{
+                 for (var i = 0; i < todos.length; i++) {
+                     todos[i].completed = true
+                 }
+             }
+             displayTodos()
+            
+        }
+        var displayTodosButton = document.getElementById("display-todos-button")
+        displayTodosButton.addEventListener("click", displayTodos)
+
+        var toggleAllButton = document.getElementById("toggle-all")
+        toggleAllButton.addEventListener("click", toggleAll)
+
     </script>
 </body>
 
